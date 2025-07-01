@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Auto_Super - Galería de Productos</title>
+  <style>
+    :root {
+      --bg-dark: #121212;
+      --card-dark: #1f1f1f;
+      --primary: #00bcd4;
+      --accent: #ff4081;
+      --text-light: #e0e0e0;
+      --text-muted: #9e9e9e;
+      --border: #333;
+      --space-sm: 0.75rem;
+      --space-md: 1.5rem;
+      --space-lg: 2rem;
+      --radius: 12px;
+      --font-sm: 0.9rem;
+      --font-base: 1rem;
+      --font-lg: 1.2rem;
+      --font-xl: 1.5rem;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-light);
+    }
+
+    .container {
+      max-width: 1300px;
+      margin: auto;
+      padding: var(--space-md);
+    }
+
+    .header {
+      background-color: #000;
+      padding: var(--space-md) 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      font-size: var(--font-xl);
+      font-weight: bold;
+      color: var(--primary);
+    }
+
+    .breadcrumb {
+      font-size: var(--font-sm);
+      color: var(--text-muted);
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: var(--font-xl);
+      margin: var(--space-lg) 0;
+      color: var(--accent);
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: var(--space-lg);
+    }
+
+    .product-card {
+      background: var(--card-dark);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.6);
+    }
+
+    .product-image-container {
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+      background: #222;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .product-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .product-card:hover .product-image {
+      transform: scale(1.05);
+    }
+
+    .product-badge {
+      position: absolute;
+      top: var(--space-sm);
+      right: var(--space-sm);
+      background: var(--accent);
+      color: white;
+      padding: 0.3rem 0.6rem;
+      border-radius: 999px;
+      font-size: var(--font-sm);
+    }
+
+    .product-content {
+      padding: var(--space-md);
+    }
+
+    .product-title {
+      font-size: var(--font-lg);
+      margin-bottom: 0.5rem;
+    }
+
+    .product-description {
+      font-size: var(--font-sm);
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+
+    .product-price {
+      font-size: var(--font-lg);
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    .product-price .original {
+      text-decoration: line-through;
+      color: #888;
+      margin-right: 0.5rem;
+    }
+
+    .product-actions {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .btn {
+      padding: 0.6rem 1.2rem;
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      font-weight: bold;
+      font-size: var(--font-sm);
+      transition: 0.3s;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #000;
+    }
+
+    .btn-primary:hover {
+      background: #00acc1;
+    }
+
+    .btn-secondary {
+      background: transparent;
+      border: 1px solid var(--primary);
+      color: var(--primary);
+    }
+
+    .btn-secondary:hover {
+      background: var(--primary);
+      color: #000;
+    }
+
+    @media (max-width: 768px) {
+      .products-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Responsive background for smartwatch */
+    .smartwatch-img {
+      background-image: url('https://images.unsplash.com/photo-1603297631959-6b78c6e62c6c?fit=crop&w=800&h=600');
+      background-size: cover;
+      background-position: center;
+      aspect-ratio: 1 / 1;
+    }
+
+    @media (max-width: 768px) {
+      .smartwatch-img {
+        background-position: top;
+      }
+    }
+
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container header-content">
+      <div class="logo">Auto_Super</div>
+      <div class="breadcrumb">Inicio > Productos > Electrónicos</div>
+    </div>
+  </header>
+
+  <main class="container">
+    <h2 class="section-title">Carros En Venta</h2>
+    <div class="products-grid">
+
+      <!-- Producto 1 -->
+      <article class="product-card">
+        <div class="product-image-container">
+          <picture>
+            <source media="(max-width: 767px)" srcset="https://assets.bridgestonetire.com/content/dam/consumer/bst/la/co/tips/2022/tecnologia-de-llantas/deportivo.jpg">
+            <source media="(min-width: 768px)" srcset="https://assets.bridgestonetire.com/content/dam/consumer/bst/la/co/tips/2022/tecnologia-de-llantas/deportivo.jpg">
+            <img class="product-image" src="https://assets.bridgestonetire.com/content/dam/consumer/bst/la/co/tips/2022/tecnologia-de-llantas/deportivo.jpg" alt="Carro deportivo rojo" loading="lazy">
+          </picture>
+          <span class="product-badge">Nuevo</span>
+        </div>
+        <div class="product-content">
+                    <h3 class="product-title">Carro Deportivo Rojo</h3>
+                    <p class="product-description">Motor V8 de alto rendimiento, diseño aerodinámico y tracción trasera.</p>
+                    <div class="product-price"><span class="original">$35,000</span>$29,999</div>
+                    <div class="product-actions">
+                        <button class="btn btn-primary">Agregar al Carrito</button>
+                        <button class="btn btn-secondary">Ver Detalles</button>
+                    </div>
+        </div>
+      </article>
+
+     <!-- Producto 2 -->
+<article class="product-card">
+  <div class="product-image-container">
+    <img class="product-image" 
+      src="https://blog.olhonocarro.com.br/wp-content/uploads/2022/10/Chevrolet-Spin-LTZ-Azul.jpg" 
+      srcset="https://blog.olhonocarro.com.br/wp-content/uploads/2022/10/Chevrolet-Spin-LTZ-Azul.jpg 400w,
+              https://blog.olhonocarro.com.br/wp-content/uploads/2022/10/Chevrolet-Spin-LTZ-Azul.jpg 800w,
+              https://blog.olhonocarro.com.br/wp-content/uploads/2022/10/Chevrolet-Spin-LTZ-Azul.jpg 1200w"
+      sizes="(max-width: 768px) 100vw, (min-width: 769px) and (max-width: 1200px) 50vw, 33vw"
+      alt="Carro familiar azul" loading="lazy">
+    <span class="product-badge">Oferta</span>
+  </div>
+  <div class="product-content">
+                    <h3 class="product-title">Carro Familiar Azul 2024</h3>
+                    <p class="product-description">Espacio amplio, ideal para viajes familiares. Motor eficiente y diseño moderno.</p>
+                    <div class="product-price"><span class="original">$28,900</span>$24,500</div>
+                    <div class="product-actions">
+                        <button class="btn btn-primary">Agregar al Carrito</button>
+                        <button class="btn btn-secondary">Ver Detalles</button>
+                    </div>
+  </div>
+</article>
+
+<!-- Producto 3 -->
+<article class="product-card">
+  <div class="product-image-container">
+    <picture>
+      <source type="image/webp" srcset="https://img.freepik.com/fotos-premium/coche-urbano-compacto-diseno-minimalista-caracteristicas-avanzadas-eficiencia-energetica_971416-300.jpg">
+      <source type="image/jpeg" srcset="https://img.freepik.com/fotos-premium/coche-urbano-compacto-diseno-minimalista-caracteristicas-avanzadas-eficiencia-energetica_971416-300.jpg">
+      <img class="product-image" src="https://img.freepik.com/fotos-premium/coche-urbano-compacto-diseno-minimalista-caracteristicas-avanzadas-eficiencia-energetica_971416-300.jpg" alt="Auto urbano compacto" loading="lazy">
+    </picture>
+    <span class="product-badge">Premium</span>
+  </div>
+  <div class="product-content">
+                    <h3 class="product-title">Auto Urbano Compacto</h3>
+                    <p class="product-description">Eficiencia de combustible y tecnología inteligente para la ciudad.</p>
+                    <div class="product-price">$18,990</div>
+                    <div class="product-actions">
+                        <button class="btn btn-primary">Agregar al Carrito</button>
+                        <button class="btn btn-secondary">Ver Detalles</button>
+                    </div>
+</article>
+
+      <!-- Producto 4-->
+
+<article class="product-card">
+  <div class="product-image-container">
+    <img class="product-image" 
+         src="https://i0.wp.com/kiacarusa.com/wp-content/uploads/2023/03/2025-KIA-Seltos-X-Line-Redesign.jpg?resize=1024%2C765&ssl=1" 
+         alt="SUV familiar" loading="lazy">
+    <span class="product-badge">Calidad</span>
+  </div>
+ <div class="product-content">
+                    <h3 class="product-title">Carro Familiar SUV 2025</h3>
+                    <p class="product-description">Espacioso y cómodo, ideal para viajes largos. Motor híbrido y asistencia al conductor.</p>
+                    <div class="product-price">$26,500</div>
+                    <div class="product-actions">
+                        <button class="btn btn-primary">Agregar al Carrito</button>
+                        <button class="btn btn-secondary">Ver Detalles</button>
+                    </div>
+                </div>
+</article>
+
+
+    </div>
+  </main>
+</body>
+</html>
